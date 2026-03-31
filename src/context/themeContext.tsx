@@ -42,7 +42,7 @@ export const BookStoreThemeProvier = ({
   return (
     <ThemeContext.Provider value={{ themeName, toggleTheme }}>
       <ThemeProvider theme={getTheme(themeName)}>
-        <GlobalStyle ThemeName={themeName} />
+        <GlobalStyle themeName={themeName} />
         {children}
       </ThemeProvider>
     </ThemeContext.Provider>
