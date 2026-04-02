@@ -1,31 +1,29 @@
 import styled from "styled-components";
 import logo from "../assets/images/logo192.png";
 import { FaSignInAlt, FaRegUser } from "react-icons/fa";
-
-const CATEGORY = [
-  { id: null, name: "현제" },
-  { id: 0, name: "동화" },
-  { id: 1, name: "소설" },
-  { id: 2, name: "사회" },
-];
+import { Link } from "react-router-dom";
+import { useCategory } from "../hooks/useCategory";
 
 const Header = () => {
+  const { category } = useCategory();
   return (
     <HeaderStyle>
       <h1 className="logo">
-        <img src={logo} alt="book store" />
+        <Link to="/">
+          <img src={logo} alt="book store" />
+        </Link>
       </h1>
       <nav className="category">
         <ul>
-          {CATEGORY.map((item) => (
+          {category.map((item) => (
             <li key={item.id}>
-              <a
-                href={
+              <Link
+                to={
                   item.id === null ? "/books" : `/books?category_id=${item.id}`
                 }
               >
-                {item.name}
-              </a>
+                {item.category_name}
+              </Link>
             </li>
           ))}
         </ul>
@@ -33,16 +31,16 @@ const Header = () => {
       <nav className="auth">
         <ul>
           <li>
-            <a href="/login">
+            <Link to="/login">
               <FaSignInAlt />
               로그인
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/login">
+            <Link to="/signup">
               <FaRegUser />
               회원가입
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
