@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 import { Pagination as IPagination } from "../../models/pagination.model";
 import { LIMIT } from "../../constants/pagination";
-import Button from "../Button";
 import { useSearchParams } from "react-router-dom";
 import { QUERYSTRING } from "../../constants/querystring";
+import Button from "../common/Button";
 
 interface Props {
   pagination: IPagination;

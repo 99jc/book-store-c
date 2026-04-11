@@ -2,62 +2,77 @@ import Layout from "./layout/Layout";
 import Home from "./pages/Home";
 import { BookStoreThemeProvier } from "./context/themeContext";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Error from "./components/Error";
+import Error from "./components/common/Error";
 import Signup from "./pages/Signup";
 import ResetPassword from "./pages/ResetPassword";
 import Login from "./pages/Login";
 import Books from "./pages/Books";
+import BookDetail from "./pages/BookDetail";
+import Cart from "./pages/Cart";
+import Order from "./pages/Order";
+import OrderList from "./pages/OrderList";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "./api/queryClient";
+import ToastContainer from "./components/toast/ToastContainer";
 
-const router = createBrowserRouter([
+const routeList = [
   {
     path: "/",
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
-    errorElement: <Error />,
+    element: <Home />,
   },
   {
     path: "/books",
-    element: (
-      <Layout>
-        <Books />
-      </Layout>
-    ),
+    element: <Books />,
   },
   {
     path: "/signup",
-    element: (
-      <Layout>
-        <Signup />
-      </Layout>
-    ),
+    element: <Signup />,
   },
   {
     path: "/reset",
-    element: (
-      <Layout>
-        <ResetPassword />
-      </Layout>
-    ),
+    element: <ResetPassword />,
   },
   {
     path: "/login",
-    element: (
-      <Layout>
-        <Login />
-      </Layout>
-    ),
+    element: <Login />,
   },
-]);
+  {
+    path: "/book/:bookId",
+    element: <BookDetail />,
+  },
+  {
+    path: "/cart",
+    element: <Cart />,
+  },
+  {
+    path: "/order",
+    element: <Order />,
+  },
+  {
+    path: "/orderlist",
+    element: <OrderList />,
+  },
+];
+
+const router = createBrowserRouter(
+  routeList.map((item) => {
+    return {
+      ...item,
+      element: <Layout>{item.element}</Layout>,
+      errorElement: <Error />,
+    };
+  }),
+);
 
 function App() {
   return (
     <>
-      <BookStoreThemeProvier>
-        <RouterProvider router={router} />
-      </BookStoreThemeProvier>
+      <QueryClientProvider client={queryClient}>
+        <BookStoreThemeProvier>
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </BookStoreThemeProvier>
+      </QueryClientProvider>
     </>
   );
 }

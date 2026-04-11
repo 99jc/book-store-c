@@ -1,9 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import { useCategory } from "../../hooks/useCategory";
-import Button from "../Button";
 import { useSearchParams } from "react-router-dom";
 import { QUERYSTRING } from "../../constants/querystring";
+import Button from "../common/Button";
 
 const BooksFileter = () => {
   const { category } = useCategory();

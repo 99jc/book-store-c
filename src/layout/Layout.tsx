@@ -1,6 +1,6 @@
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import styled from "styled-components";
+import Header from "../components/common/Header";
+import Footer from "../components/common/Footer";
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -22,6 +22,10 @@ const LayoutStyle = styled.main`
   max-width: ${({ theme }) => theme.layout.width.large};
 
   padding: 20px 0;
+
+  @media screen AND ${({ theme }) => theme.mediaQuery.mobile} {
+    padding: 20px 12px;
+  }
 `;
 
 export default Layout;
